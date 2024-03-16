@@ -2,7 +2,10 @@ package handlers
 
 import (
 	"context"
+	_ "github.com/ast3am/VKintern-movies/docs"
 	"github.com/ast3am/VKintern-movies/internal/models"
+	httpSwagger "github.com/swaggo/http-swagger/v2"
+
 	"net/http"
 )
 
@@ -60,5 +63,8 @@ func (h *Handler) RegisterHandlers(mux *http.ServeMux) {
 	mux.HandleFunc("/movie/delete/", h.DeleteMovie)    //+
 	mux.HandleFunc("/movie/get-list", h.GetMoviesList)
 	mux.HandleFunc("/movie/get-movie", h.GetMovie)
+	mux.Handle("/swagger/", httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
+	))
 	http.Handle("/", mux)
 }

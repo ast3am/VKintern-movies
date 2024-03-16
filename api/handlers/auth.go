@@ -12,6 +12,16 @@ type UserDTO struct {
 	Password string `json:"password"`
 }
 
+// Auth godoc
+// @Summary Вход в систему
+// @Description Вход в систему по логину и паролю
+// @Tags auth
+// @Accept json
+// @Produce json
+// @Param data body UserDTO true "Входные параметры"
+// @Success 200 {object} string
+// @Failure 400,405,422 {object} error
+// @Router /auth [post]
 func (h *Handler) Auth(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))

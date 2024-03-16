@@ -9,6 +9,17 @@ import (
 	"path"
 )
 
+// CreateActor godoc
+// @Summary Создание актера
+// @Description Создание актера, предполагается что все поля не пустые
+// @Tags actor
+// @Accept json
+// @Produce json
+// @Param data body models.Actor true "Входные параметры"
+// @Success 200 {object} string
+// @Failure 400,401,405,422 {object} error
+// @Router /actor/create [post]
+// @Security ApiKeyAuth
 func (h *Handler) CreateActor(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -57,6 +68,17 @@ func (h *Handler) CreateActor(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Actor created")
 }
 
+// GetActorsList godoc
+// @Summary Получение списка актеров
+// @Description Для каждого актера так же выдается список фильмов
+// @Tags actor
+// @Accept json
+// @Produce json
+// @Param uuid query string true "UUID актера"
+// @Success 200 {object} map[string][]string
+// @Failure 400,401,405,422 {object} error
+// @Router /actor/get-list [get]
+// @Security ApiKeyAuth
 func (h *Handler) GetActorsList(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -90,6 +112,17 @@ func (h *Handler) GetActorsList(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Actor list created")
 }
 
+// UpdateActor godoc
+// @Summary Изменение информации об актере
+// @Description Информация может быть изменена как частично, так и полностью
+// @Tags actor
+// @Accept json
+// @Produce json
+// @Param data body models.Actor true "Входные параметры"
+// @Success 200 {object} string
+// @Failure 400,401,405,422 {object} error
+// @Router /actor/update/ [patch]
+// @Security ApiKeyAuth
 func (h *Handler) UpdateActor(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPatch {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -134,6 +167,17 @@ func (h *Handler) UpdateActor(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Actor updated")
 }
 
+// DeleteActor godoc
+// @Summary Удаление информации об актере
+// @Description Полное удаление информации по UUID
+// @Tags actor
+// @Accept json
+// @Produce json
+// @Param uuid query string true "UUID актера"
+// @Success 200 {object} string
+// @Failure 400,401,405,422 {object} error
+// @Router /actor/delete [delete]
+// @Security ApiKeyAuth
 func (h *Handler) DeleteActor(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))

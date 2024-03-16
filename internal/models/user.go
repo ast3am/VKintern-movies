@@ -1,7 +1,5 @@
 package models
 
-import "golang.org/x/crypto/bcrypt"
-
 type User struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -13,9 +11,4 @@ func (u *User) CheckCreds(email, password string) bool {
 		return false
 	}
 	return true
-}
-
-func checkPassword(userPwdHash, requestPwdHash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(userPwdHash), []byte(requestPwdHash))
-	return err == nil
 }

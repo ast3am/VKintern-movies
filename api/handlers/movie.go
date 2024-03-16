@@ -10,6 +10,17 @@ import (
 	"path"
 )
 
+// CreateMovie godoc
+// @Summary Создание фильма
+// @Description Создание фильма, предполагается что все поля не пустые
+// @Tags movie
+// @Accept json
+// @Produce json
+// @Param data body models.Movie true "Входные параметры"
+// @Success 200 {object} string
+// @Failure 400,401,405,422 {object} error
+// @Router /movie/create [post]
+// @Security ApiKeyAuth
 func (h *Handler) CreateMovie(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -58,6 +69,17 @@ func (h *Handler) CreateMovie(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Movie created")
 }
 
+// UpdateMovie godoc
+// @Summary Изменение информации о фильме
+// @Description Информация может быть изменена как частично, так и полностью
+// @Tags movie
+// @Accept json
+// @Produce json
+// @Param data body models.Movie true "Входные параметры"
+// @Success 200 {object} string
+// @Failure 400,401,405,422 {object} error
+// @Router /movie/update/ [patch]
+// @Security ApiKeyAuth
 func (h *Handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPatch {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -108,6 +130,17 @@ func (h *Handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Movie updated")
 }
 
+// DeleteMovie godoc
+// @Summary Удаление информации о фильме
+// @Description Полное удаление информации по UUID
+// @Tags movie
+// @Accept json
+// @Produce json
+// @Param uuid query string true "UUID фильма"
+// @Success 200 {object} string
+// @Failure 400,401,405,422 {object} error
+// @Router /movie/delete [delete]
+// @Security ApiKeyAuth
 func (h *Handler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -136,6 +169,18 @@ func (h *Handler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Movie deleted")
 }
 
+// GetMoviesList godoc
+// @Summary Получение списка фильмов
+// @Description Получение списка с возможностью сортировки, параметры задаются в URL
+// @Tags movie
+// @Accept json
+// @Produce json
+// @Param sortby query string false "Указания поля для сортировки, по умолчанию rating)"
+// @Param line query string false "Указание типа сортировки, по умолчанию desc"
+// @Success 200 {object} models.Movie
+// @Failure 400,401,405,422 {object} error
+// @Router /movie/get-list [get]
+// @Security ApiKeyAuth
 func (h *Handler) GetMoviesList(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))
@@ -182,6 +227,18 @@ func (h *Handler) GetMoviesList(w http.ResponseWriter, r *http.Request) {
 	h.log.HandlerLog(r, http.StatusOK, "Movie list created")
 }
 
+// GetMovie godoc
+// @Summary Получение списка фильмов
+// @Description Получение списка фильмов с поиском по фрагменту названия и фрагменту имени актера
+// @Tags movie
+// @Accept json
+// @Produce json
+// @Param actor query string false "Указание актера"
+// @Param movie query string false "Указание названия фильма"
+// @Success 200 {object} models.Movie
+// @Failure 400,401,405,422 {object} error
+// @Router /movie/get-movie [get]
+// @Security ApiKeyAuth
 func (h *Handler) GetMovie(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		h.log.HandlerErrorLog(r, http.StatusMethodNotAllowed, "", errors.New(MethodNotAllowed))

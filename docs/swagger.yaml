@@ -1,0 +1,407 @@
+basePath: /
+definitions:
+  handlers.UserDTO:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.Actor:
+    properties:
+      birth_date:
+        type: string
+      gender:
+        type: string
+      name:
+        type: string
+    type: object
+  models.Movie:
+    properties:
+      actor_list:
+        items:
+          type: string
+        type: array
+      description:
+        type: string
+      name:
+        type: string
+      rating:
+        type: number
+      release_date:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  title: VKintern api doc
+  version: "1.0"
+paths:
+  /actor/create:
+    post:
+      consumes:
+      - application/json
+      description: Создание актера, предполагается что все поля не пустые
+      parameters:
+      - description: Входные параметры
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.Actor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Создание актера
+      tags:
+      - actor
+  /actor/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Полное удаление информации по UUID
+      parameters:
+      - description: UUID актера
+        in: query
+        name: uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Удаление информации об актере
+      tags:
+      - actor
+  /actor/get-list:
+    get:
+      consumes:
+      - application/json
+      description: Для каждого актера так же выдается список фильмов
+      parameters:
+      - description: UUID актера
+        in: query
+        name: uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Получение списка актеров
+      tags:
+      - actor
+  /actor/update/:
+    patch:
+      consumes:
+      - application/json
+      description: Информация может быть изменена как частично, так и полностью
+      parameters:
+      - description: Входные параметры
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.Actor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Изменение информации об актере
+      tags:
+      - actor
+  /auth:
+    post:
+      consumes:
+      - application/json
+      description: Вход в систему по логину и паролю
+      parameters:
+      - description: Входные параметры
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UserDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      summary: Вход в систему
+      tags:
+      - auth
+  /movie/create:
+    post:
+      consumes:
+      - application/json
+      description: Создание фильма, предполагается что все поля не пустые
+      parameters:
+      - description: Входные параметры
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Создание фильма
+      tags:
+      - movie
+  /movie/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Полное удаление информации по UUID
+      parameters:
+      - description: UUID фильма
+        in: query
+        name: uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Удаление информации о фильме
+      tags:
+      - movie
+  /movie/get-list:
+    get:
+      consumes:
+      - application/json
+      description: Получение списка с возможностью сортировки, параметры задаются
+        в URL
+      parameters:
+      - description: Указания поля для сортировки, по умолчанию rating)
+        in: query
+        name: sortby
+        type: string
+      - description: Указание типа сортировки, по умолчанию desc
+        in: query
+        name: line
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Movie'
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Получение списка фильмов
+      tags:
+      - movie
+  /movie/get-movie:
+    get:
+      consumes:
+      - application/json
+      description: Получение списка фильмов с поиском по фрагменту названия и фрагменту
+        имени актера
+      parameters:
+      - description: Указание актера
+        in: query
+        name: actor
+        type: string
+      - description: Указание названия фильма
+        in: query
+        name: movie
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Movie'
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Получение списка фильмов
+      tags:
+      - movie
+  /movie/update/:
+    patch:
+      consumes:
+      - application/json
+      description: Информация может быть изменена как частично, так и полностью
+      parameters:
+      - description: Входные параметры
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "401":
+          description: Unauthorized
+          schema: {}
+        "405":
+          description: Method Not Allowed
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Изменение информации о фильме
+      tags:
+      - movie
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
