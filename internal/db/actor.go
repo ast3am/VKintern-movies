@@ -23,7 +23,7 @@ func (db *DB) CreateActor(ctx context.Context, id uuid.UUID, actor models.Actor)
 	updateFilmOrder := `
 	UPDATE movie_actors
 	SET actor_uuid = $1
-	where actor_name LIKE $2;
+	where actor_name = $2;
 `
 	_, err = tx.Exec(ctx, updateFilmOrder, id, actor.Name)
 	if err != nil {

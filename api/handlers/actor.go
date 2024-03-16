@@ -36,12 +36,14 @@ func (h *Handler) CreateActor(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = h.services.CreateActor(r.Context(), actor)
-	if err.Error() == "empty name" {
-		http.Error(w, UnprocessableEntity, http.StatusUnprocessableEntity)
-		return
-	} else if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
+	if err != nil {
+		if err.Error() == "empty name" {
+			http.Error(w, UnprocessableEntity, http.StatusUnprocessableEntity)
+			return
+		} else {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("actor created"))

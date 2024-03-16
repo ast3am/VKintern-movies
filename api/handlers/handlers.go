@@ -29,6 +29,10 @@ type services interface {
 	DeleteActor(ctx context.Context, id string) error
 	UpdateActor(ctx context.Context, id string, actor models.Actor) error
 	CreateMovie(ctx context.Context, movie models.Movie) error
+	UpdateMovie(ctx context.Context, id string, movie models.Movie) error
+	DeleteMovie(ctx context.Context, id string) error
+	GetMovieList(ctx context.Context, sortby, line string) ([]*models.Movie, error)
+	GetMovie(ctx context.Context, actor, movie string) ([]*models.Movie, error)
 }
 
 type Handler struct {
@@ -50,9 +54,9 @@ func (h *Handler) RegisterHandlers(mux *http.ServeMux) {
 	mux.HandleFunc("/actor/update/", h.UpdateActor)    //+
 	mux.HandleFunc("/actor/delete/", h.DeleteActor)    //+
 	mux.HandleFunc("/movie/create", h.CreateMovie)     //+
-	mux.HandleFunc("/movie/update/", h.UpdateMovie)
-	mux.HandleFunc("/movie/delete/", h.DeleteMovie)
-	mux.HandleFunc("/movie/get-list/", h.GetMoviesList)
-	mux.HandleFunc("/movie/get-movie/", h.GetMovie)
+	mux.HandleFunc("/movie/update/", h.UpdateMovie)    //+
+	mux.HandleFunc("/movie/delete/", h.DeleteMovie)    //+
+	mux.HandleFunc("/movie/get-list", h.GetMoviesList)
+	mux.HandleFunc("/movie/get-movie", h.GetMovie)
 	http.Handle("/", mux)
 }

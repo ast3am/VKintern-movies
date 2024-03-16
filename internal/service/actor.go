@@ -34,6 +34,9 @@ func (s *Service) UpdateActor(ctx context.Context, id string, actor models.Actor
 		return err
 	}
 	nowActor, err := s.db.GetActorByUUID(ctx, uid)
+	if err != nil {
+		return err
+	}
 	if actor.Name == "" {
 		actor.Name = nowActor.Name
 	}
