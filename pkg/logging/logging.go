@@ -3,13 +3,14 @@ package logging
 import (
 	"fmt"
 	"github.com/rs/zerolog"
+	"io"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
 )
 
-func Get(logLevel string) zerolog.Logger {
+func Get(logLevel string, w io.Writer) zerolog.Logger {
 
 	var level zerolog.Level
 	switch logLevel {
@@ -31,7 +32,8 @@ func Get(logLevel string) zerolog.Logger {
 		Level(level)).
 		With().
 		Timestamp().
-		Logger()
+		Logger().
+		Output(w)
 	return log
 }
 
@@ -39,8 +41,8 @@ type Logger struct {
 	zerolog.Logger
 }
 
-func GetLogger(level string) *Logger {
-	return &Logger{Get(level)}
+func GetLogger(level string, w io.Writer) *Logger {
+	return &Logger{Get(level, w)}
 }
 
 func (l *Logger) FatalMsg(msg string, err error) {

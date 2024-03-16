@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15.4
+    environment:
+      POSTGRES_DB: "film_library_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    healthcheck:
+      test: pg_isready --username "postgres" --dbname "film_library_db"
+      interval: 1s
+      retries: 3
+      timeout: 5s
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migration/film_library_create_table.sql:/docker-entrypoint-initdb.d/film_library_create_table.sql
+
+  myapp:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres

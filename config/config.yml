@@ -2,8 +2,8 @@ listen_port: "8080"
 sql_config:
   username_db: "postgres"
   password_db: "password"
-  host_db: "localhost"
-  port_db: "5431"
+  host_db: "postgres"
+  port_db: "5432"
   db_name: "film_library_db"
-  delay_time: 5
+  delay_time: 10
 log_level: "debug"

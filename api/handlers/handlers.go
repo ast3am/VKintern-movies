@@ -19,6 +19,8 @@ const (
 )
 
 type logger interface {
+	HandlerErrorLog(r *http.Request, status int, msg string, err error)
+	HandlerLog(r *http.Request, status int, msg string)
 }
 
 type services interface {
