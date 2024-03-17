@@ -138,7 +138,7 @@ func (h *Handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param uuid query string true "UUID фильма"
 // @Success 200 {object} string
-// @Failure 400,401,405,422 {object} error
+// @Failure 400,401,405 {object} error
 // @Router /movie/delete [delete]
 // @Security ApiKeyAuth
 func (h *Handler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
@@ -165,7 +165,7 @@ func (h *Handler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("movie deleted"))
+	w.Write([]byte("Movie deleted"))
 	h.log.HandlerLog(r, http.StatusOK, "Movie deleted")
 }
 
@@ -178,7 +178,8 @@ func (h *Handler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 // @Param sortby query string false "Указания поля для сортировки, по умолчанию rating)"
 // @Param line query string false "Указание типа сортировки, по умолчанию desc"
 // @Success 200 {object} models.Movie
-// @Failure 400,401,405,422 {object} error
+// @Failure 400,401,405 {object} error
+// @Failure 500 {object} error
 // @Router /movie/get-list [get]
 // @Security ApiKeyAuth
 func (h *Handler) GetMoviesList(w http.ResponseWriter, r *http.Request) {
@@ -236,7 +237,8 @@ func (h *Handler) GetMoviesList(w http.ResponseWriter, r *http.Request) {
 // @Param actor query string false "Указание актера"
 // @Param movie query string false "Указание названия фильма"
 // @Success 200 {object} models.Movie
-// @Failure 400,401,405,422 {object} error
+// @Failure 400,401,405 {object} error
+// @Failure 500 {object} error
 // @Router /movie/get-movie [get]
 // @Security ApiKeyAuth
 func (h *Handler) GetMovie(w http.ResponseWriter, r *http.Request) {

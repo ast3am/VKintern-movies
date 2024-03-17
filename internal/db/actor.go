@@ -107,7 +107,8 @@ func (db *DB) GetActorList(ctx context.Context) (map[string][]string, error) {
 	SELECT actors.name AS actor_name, movies.name AS movie_name
 	FROM movies
 	JOIN movie_actors ON movies.uuid = movie_actors.movie_uuid
-	JOIN actors ON movie_actors.actor_uuid = actors.uuid`
+	JOIN actors ON movie_actors.actor_uuid = actors.uuid
+	ORDER BY actor_name, movie_name`
 	rows, err := db.dbConnect.Query(ctx, getActorsOrder)
 	if err != nil {
 		return nil, err

@@ -34,3 +34,4 @@ values ('2300a1f6-b2aa-4f5b-b6ca-8f495582e255', 'testuser@mail.com',
 insert into users
 values ('482d6f53-b2ee-4684-887e-2588ae6c9d48',
         'admin@vk.ru', 'adminPassword#1', 'admin') ;
+

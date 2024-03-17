@@ -1,0 +1,78 @@
+POST http://localhost:8080/auth
+Content-Type: application/json; charset=utf-8
+
+{"email":"testuser@mail.com","password":"$2a$10$wKsAm7WlmUvm4Lfzc1VeO.kGD6fJ4n6LdjguoV8INkugW8v.3R1MG"}
+### by user
+POST http://localhost:8080/auth
+Content-Type: application/json; charset=utf-8
+
+{"email":"testuser@mail.com","password":"userPassword"}
+### by admin
+POST http://localhost:8080/auth
+Content-Type: application/json; charset=utf-8
+
+{"email":"admin@vk.ru","password":"adminPassword#1"}
+### by admin
+POST http://localhost:8080/actor/create
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzEwNjQ2OTkwLCJyb2xlIjoiYWRtaW4ifQ.WSXsPNTk224TKcUaP1XYnQNgGqx4G7qsZY_QjEAUcZE
+
+{"name": "boris", "gender": "male", "birth_date": "1982-04-01"}
+### by user
+POST http://localhost:8080/actor/create
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQG1haWwuY29tIiwiZXhwIjoxNzEwNjE1OTUyLCJyb2xlIjoidXNlciJ9.3yM4fsdPvQUY5JgAIHRYIRwlFYs6Q2bBk0EaN_E7RoY
+
+{}
+### by admin
+DELETE http://localhost:8080/actor/delete/b0482c7a-1a4c-4a3c-9463-35f0036a0d62
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzE1ODQ5MDg4LCJyb2xlIjoiYWRtaW4ifQ.oHRKkhFxnRcxE6etJ8VdeL4x9M2tiAUpxrOY1Bmluuc
+
+### by admin
+PATCH http://localhost:8080/actor/update/b0482c7a-1a4c-4a3c-9463-35f0036a0d65
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzE1ODQ5MDg4LCJyb2xlIjoiYWRtaW4ifQ.oHRKkhFxnRcxE6etJ8VdeL4x9M2tiAUpxrOY1Bmluuc
+
+{"name": "suize", "gender": "female"}
+### by admin create/movie
+POST http://localhost:8080/movie/create
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzEwNjE1ODQyLCJyb2xlIjoiYWRtaW4ifQ.omSLkHvivUaRiBNwa9Gh5f-bXgNiMprl2D7d5eRJpy8
+
+{"name": "badBoys", "description": "the movie about two boys", "release_date": "1995-04-01", "rating":  9.2, "actor_list": ["jhon", "will"]}
+
+### by admin create/movie
+POST http://localhost:8080/movie/create
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzEwNjE1ODQyLCJyb2xlIjoiYWRtaW4ifQ.omSLkHvivUaRiBNwa9Gh5f-bXgNiMprl2D7d5eRJpy8
+
+{"name": "snatch", "description": "the movie about sad dog", "release_date": "1992-04-01", "rating":  10, "actor_list": ["boris"]}
+### by user
+GET http://localhost:8080/actor/get-list
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzE1ODQ5MDg4LCJyb2xlIjoiYWRtaW4ifQ.oHRKkhFxnRcxE6etJ8VdeL4x9M2tiAUpxrOY1Bmluuc
+
+{}
+
+### by admin update/movie
+PATCH http://localhost:8080/movie/update/08ed098c-e3a0-11ee-8751-2e8752a1069e
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzEwNjE1ODQyLCJyb2xlIjoiYWRtaW4ifQ.omSLkHvivUaRiBNwa9Gh5f-bXgNiMprl2D7d5eRJpy8
+
+{"description" :  "the best film of all time"}
+
+### by admin
+DELETE http://localhost:8080/movie/delete/f44d4a8f-7f16-4c1d-836b-02e0b8de4a00
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzE1ODQ5MDg4LCJyb2xlIjoiYWRtaW4ifQ.oHRKkhFxnRcxE6etJ8VdeL4x9M2tiAUpxrOY1Bmluuc
+
+### by admin
+GET http://localhost:8080/movie/get-movie?actor=Jul
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzE1ODQ5MDg4LCJyb2xlIjoiYWRtaW4ifQ.oHRKkhFxnRcxE6etJ8VdeL4x9M2tiAUpxrOY1Bmluuc
+
+### by admin
+GET http://localhost:8080/movie/get-list?sortby=release_date&line=asc
+Content-Type: application/json; charset=utf-8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHZrLnJ1IiwiZXhwIjoxNzE1ODQ5MDg4LCJyb2xlIjoiYWRtaW4ifQ.oHRKkhFxnRcxE6etJ8VdeL4x9M2tiAUpxrOY1Bmluuc

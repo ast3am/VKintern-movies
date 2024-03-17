@@ -16,7 +16,7 @@ func GetToken(email, role string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": email,
 		"role":  role,
-		"exp":   time.Now().Add(time.Minute * 300).Unix(),
+		"exp":   time.Now().Add(time.Hour * 1).Unix(),
 	})
 
 	resToken, err := token.SignedString(secretKey)
@@ -36,6 +36,7 @@ func CheckPermissionByToken(token, permissionLevel string) error {
 	})
 
 	if err != nil {
+		err = errors.New("not a valid token")
 		return err
 	}
 	role := ""

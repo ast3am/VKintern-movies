@@ -37,6 +37,9 @@ func (s *Service) UpdateMovie(ctx context.Context, id string, movie models.Movie
 	if movie.Rating == 0.0 {
 		movie.Rating = nowMovie.Rating
 	}
+	if len(movie.ActorList) == 0 {
+		movie.ActorList = nowMovie.ActorList
+	}
 	err = movie.Validate()
 	if err != nil {
 		return err

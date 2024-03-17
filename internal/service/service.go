@@ -6,6 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate mockery --name db
 type db interface {
 	GetUserByEmail(ctx context.Context, email string) (*models.User, error)
 	GetActorByUUID(ctx context.Context, id uuid.UUID) (*models.Actor, error)
@@ -21,6 +22,7 @@ type db interface {
 	GetMovie(ctx context.Context, actor, movie string) ([]*models.Movie, error)
 }
 
+//go:generate mockery --name logger
 type logger interface {
 	DebugMsg(msg string)
 	ErrorMsg(msg string, err error)

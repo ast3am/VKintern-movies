@@ -58,15 +58,30 @@ func (db *DB) CreateMovie(ctx context.Context, id uuid.UUID, movie models.Movie)
 }
 
 func (db *DB) GetMovieByUUID(ctx context.Context, id uuid.UUID) (*models.Movie, error) {
-	result := models.Movie{}
-	queryOrder := `
-	SELECT name, description, release_date, rating FROM movies WHERE uuid = $1
-	`
-	err := db.dbConnect.QueryRow(ctx, queryOrder, id).Scan(&result.Name, &result.Description, &result.ReleaseDate, &result.Rating)
+	result := &models.Movie{}
+	getMovieOrder := `
+	SELECT name, description, release_date, rating, actor_name FROM movies
+	JOIN movie_actors ma ON ma.movie_uuid = movies.uuid
+	WHERE movies.uuid = $1
+	order by name`
+	rows, err := db.dbConnect.Query(ctx, getMovieOrder, id)
 	if err != nil {
 		return nil, err
 	}
-	return &result, nil
+	defer rows.Close()
+	var timestamp sql.NullTime
+	for rows.Next() {
+		actorName := ""
+		err = rows.Scan(&result.Name, &result.Description, &timestamp, &result.Rating, &actorName)
+		if err != nil {
+			return nil, err
+		}
+		if timestamp.Valid {
+			result.ReleaseDate = timestamp.Time
+		}
+		result.ActorList = append(result.ActorList, actorName)
+	}
+	return result, nil
 }
 
 func (db *DB) UpdateMovie(ctx context.Context, id uuid.UUID, movie models.Movie) error {
@@ -153,7 +168,7 @@ func (db *DB) GetMovieList(ctx context.Context, sortby, list string) ([]*models.
 	result := make([]*models.Movie, 0)
 	getMovieOrder := `SELECT name, description, release_date, rating, actor_name FROM movies
 	JOIN movie_actors ma ON ma.movie_uuid = movies.uuid`
-	getMovieOrder += " order by " + sortby + " " + list
+	getMovieOrder += " order by " + sortby + " " + list + ", actor_name"
 	rows, err := db.dbConnect.Query(ctx, getMovieOrder)
 	if err != nil {
 		return nil, err

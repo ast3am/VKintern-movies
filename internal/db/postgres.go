@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+//go:generate mockery --name logger
 type logger interface {
 	DebugMsg(msg string)
 	ErrorMsg(msg string, err error)

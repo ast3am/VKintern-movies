@@ -3,7 +3,7 @@ sql_config:
   username_db: "postgres"
   password_db: "password"
   host_db: "localhost"
-  port_db: "5431"
+  port_db: "5430"
   db_name: "film_library_db"
   delay_time: 10
 log_level: "debug"

@@ -76,7 +76,8 @@ func (h *Handler) CreateActor(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param uuid query string true "UUID актера"
 // @Success 200 {object} map[string][]string
-// @Failure 400,401,405,422 {object} error
+// @Failure 400,401,405 {object} error
+// @Failure 500 {object} error
 // @Router /actor/get-list [get]
 // @Security ApiKeyAuth
 func (h *Handler) GetActorsList(w http.ResponseWriter, r *http.Request) {
@@ -163,7 +164,7 @@ func (h *Handler) UpdateActor(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("actor updated"))
+	w.Write([]byte("Actor updated"))
 	h.log.HandlerLog(r, http.StatusOK, "Actor updated")
 }
 
@@ -175,7 +176,7 @@ func (h *Handler) UpdateActor(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param uuid query string true "UUID актера"
 // @Success 200 {object} string
-// @Failure 400,401,405,422 {object} error
+// @Failure 400,401,405 {object} error
 // @Router /actor/delete [delete]
 // @Security ApiKeyAuth
 func (h *Handler) DeleteActor(w http.ResponseWriter, r *http.Request) {
