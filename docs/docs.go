@@ -115,10 +115,6 @@ const docTemplate = `{
                     "405": {
                         "description": "Method Not Allowed",
                         "schema": {}
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "schema": {}
                     }
                 }
             }
@@ -175,8 +171,8 @@ const docTemplate = `{
                         "description": "Method Not Allowed",
                         "schema": {}
                     },
-                    "422": {
-                        "description": "Unprocessable Entity",
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {}
                     }
                 }
@@ -383,10 +379,6 @@ const docTemplate = `{
                     "405": {
                         "description": "Method Not Allowed",
                         "schema": {}
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "schema": {}
                     }
                 }
             }
@@ -442,8 +434,8 @@ const docTemplate = `{
                         "description": "Method Not Allowed",
                         "schema": {}
                     },
-                    "422": {
-                        "description": "Unprocessable Entity",
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {}
                     }
                 }
@@ -500,8 +492,8 @@ const docTemplate = `{
                         "description": "Method Not Allowed",
                         "schema": {}
                     },
-                    "422": {
-                        "description": "Unprocessable Entity",
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {}
                     }
                 }

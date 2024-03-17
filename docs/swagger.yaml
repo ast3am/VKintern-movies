@@ -100,9 +100,6 @@ paths:
         "405":
           description: Method Not Allowed
           schema: {}
-        "422":
-          description: Unprocessable Entity
-          schema: {}
       security:
       - ApiKeyAuth: []
       summary: Удаление информации об актере
@@ -139,8 +136,8 @@ paths:
         "405":
           description: Method Not Allowed
           schema: {}
-        "422":
-          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
           schema: {}
       security:
       - ApiKeyAuth: []
@@ -277,9 +274,6 @@ paths:
         "405":
           description: Method Not Allowed
           schema: {}
-        "422":
-          description: Unprocessable Entity
-          schema: {}
       security:
       - ApiKeyAuth: []
       summary: Удаление информации о фильме
@@ -316,8 +310,8 @@ paths:
         "405":
           description: Method Not Allowed
           schema: {}
-        "422":
-          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
           schema: {}
       security:
       - ApiKeyAuth: []
@@ -355,8 +349,8 @@ paths:
         "405":
           description: Method Not Allowed
           schema: {}
-        "422":
-          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
           schema: {}
       security:
       - ApiKeyAuth: []
