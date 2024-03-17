@@ -55,16 +55,16 @@ func NewHandler(serv service, log logger) *Handler {
 }
 
 func (h *Handler) RegisterHandlers(mux *http.ServeMux) {
-	mux.HandleFunc("/auth", h.Auth)                    //+
-	mux.HandleFunc("/actor/create", h.CreateActor)     //+
-	mux.HandleFunc("/actor/get-list", h.GetActorsList) //+
+	mux.HandleFunc("/auth", h.Auth)
+	mux.HandleFunc("/actor/create", h.CreateActor)
+	mux.HandleFunc("/actor/get-list", h.GetActorsList)
 	mux.HandleFunc("/actor/update/", h.UpdateActor)
 	mux.HandleFunc("/actor/delete/", h.DeleteActor)
-	mux.HandleFunc("/movie/create", h.CreateMovie) //+
+	mux.HandleFunc("/movie/create", h.CreateMovie)
 	mux.HandleFunc("/movie/update/", h.UpdateMovie)
 	mux.HandleFunc("/movie/delete/", h.DeleteMovie)
-	mux.HandleFunc("/movie/get-list", h.GetMoviesList) //+
-	mux.HandleFunc("/movie/get-movie", h.GetMovie)     //+
+	mux.HandleFunc("/movie/get-list", h.GetMoviesList)
+	mux.HandleFunc("/movie/get-movie", h.GetMovie)
 	mux.Handle("/swagger/", httpSwagger.Handler(
 		httpSwagger.URL("http://localhost:8080/swagger/doc.json"),
 	))
